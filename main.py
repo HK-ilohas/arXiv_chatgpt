@@ -17,11 +17,16 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 
 
+# モデルと埋め込みの初期化
 model = ChatOpenAI(model_name="gpt-3.5-turbo")
 embeddings = OpenAIEmbeddings(model="text-embedding-ada-002")
 
 
 def initialize_chains():
+    """
+    LangChainで使用するprompt templateとchainを初期化する
+    """
+    # map-reduce法
     map_template = """
     以下の文章を要約してください。
     ただし、次のことに注意してください。
@@ -70,6 +75,9 @@ def initialize_chains():
 
 
 async def handle_chat_start():
+    """
+    チャット開始時にユーザーからarXivのURLを取得し、関連するドキュメントを取得する
+    """
     retriever = ArxivRetriever(load_max_docs=1)
     docs = None
 
@@ -98,6 +106,9 @@ async def handle_chat_start():
 
 
 async def process_document(docs):
+    """
+    取得したドキュメントをダウンロードし、PDFをテキストに変換する
+    """
     id = docs[0].metadata["Entry ID"].split("/")[-1]
     pdf_url = f"https://arxiv.org/pdf/{id}.pdf"
     response = requests.get(pdf_url)
@@ -119,6 +130,9 @@ async def process_document(docs):
 
 @cl.on_chat_start
 async def chat_start():
+    """
+    チャット開始時に行う一連の処理を定義する
+    """
     docs = await handle_chat_start()
     split_docs = await process_document(docs)
 
@@ -135,6 +149,9 @@ async def chat_start():
 
 @cl.on_message
 async def main(message):
+    """
+    メッセージ受信時にPDFドキュメント内での質問応答を行う
+    """
     database = cl.user_session.get("database")
     pdf_qa = ConversationalRetrievalChain.from_llm(
         model, database.as_retriever(), return_source_documents=True
