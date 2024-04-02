@@ -19,6 +19,8 @@ anyio==3.7.1
     #   starlette
     #   watchfiles
 arxiv==2.1.0
+asgiref==3.8.1
+    # via opentelemetry-instrumentation-asgi
 async-timeout==4.0.3
     # via
     #   aiohttp
@@ -27,22 +29,56 @@ asyncer==0.0.2
     # via chainlit
 attrs==23.2.0
     # via aiohttp
+backoff==2.2.1
+    # via posthog
+bcrypt==4.1.2
+    # via chromadb
 bidict==0.23.1
     # via python-socketio
+blis==0.7.11
+    # via thinc
+build==1.2.1
+    # via chromadb
+cachetools==5.3.3
+    # via google-auth
+catalogue==2.0.10
+    # via
+    #   spacy
+    #   srsly
+    #   thinc
 certifi==2024.2.2
     # via
     #   httpcore
     #   httpx
+    #   kubernetes
+    #   pulsar-client
     #   requests
 chainlit==1.0.401
 charset-normalizer==3.3.2
     # via requests
 chevron==0.14.0
     # via literalai
+chroma-hnswlib==0.7.3
+    # via chromadb
+chromadb==0.4.24
 click==8.1.7
     # via
     #   chainlit
+    #   typer
     #   uvicorn
+cloudpathlib==0.16.0
+    # via weasel
+coloredlogs==15.0.1
+    # via onnxruntime
+confection==0.1.4
+    # via
+    #   thinc
+    #   weasel
+cymem==2.0.8
+    # via
+    #   preshed
+    #   spacy
+    #   thinc
 dataclasses-json==0.5.14
     # via
     #   chainlit
@@ -55,22 +91,32 @@ deprecated==1.2.14
     #   opentelemetry-exporter-otlp-proto-http
 distro==1.9.0
     # via openai
+en-core-web-sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
 exceptiongroup==1.2.0
     # via anyio
 fastapi==0.108.0
     # via
     #   chainlit
+    #   chromadb
     #   fastapi-socketio
 fastapi-socketio==0.0.10
     # via chainlit
 feedparser==6.0.10
     # via arxiv
+filelock==3.13.3
+    # via huggingface-hub
 filetype==1.2.0
     # via chainlit
+flatbuffers==24.3.25
+    # via onnxruntime
 frozenlist==1.4.1
     # via
     #   aiohttp
     #   aiosignal
+fsspec==2024.3.1
+    # via huggingface-hub
+google-auth==2.29.0
+    # via kubernetes
 googleapis-common-protos==1.63.0
     # via
     #   opentelemetry-exporter-otlp-proto-grpc
@@ -78,7 +124,9 @@ googleapis-common-protos==1.63.0
 greenlet==3.0.3
     # via sqlalchemy
 grpcio==1.62.1
-    # via opentelemetry-exporter-otlp-proto-grpc
+    # via
+    #   chromadb
+    #   opentelemetry-exporter-otlp-proto-grpc
 h11==0.14.0
     # via
     #   httpcore
@@ -86,11 +134,17 @@ h11==0.14.0
     #   wsproto
 httpcore==1.0.5
     # via httpx
+httptools==0.6.1
+    # via uvicorn
 httpx==0.27.0
     # via
     #   chainlit
     #   literalai
     #   openai
+huggingface-hub==0.22.2
+    # via tokenizers
+humanfriendly==10.0
+    # via coloredlogs
 idna==3.6
     # via
     #   anyio
@@ -99,12 +153,18 @@ idna==3.6
     #   yarl
 importlib-metadata==7.0.0
     # via opentelemetry-api
+importlib-resources==6.4.0
+    # via chromadb
+jinja2==3.1.3
+    # via spacy
 jsonpatch==1.33
     # via
     #   langchain
     #   langchain-core
 jsonpointer==2.4
     # via jsonpatch
+kubernetes==29.0.0
+    # via chromadb
 langchain==0.1.14
 langchain-community==0.0.31
     # via langchain
@@ -117,6 +177,8 @@ langchain-core==0.1.38
 langchain-openai==0.1.1
 langchain-text-splitters==0.0.1
     # via langchain
+langcodes==3.3.0
+    # via spacy
 langsmith==0.1.38
     # via
     #   langchain
@@ -126,27 +188,55 @@ lazify==0.4.0
     # via chainlit
 literalai==0.0.300
     # via chainlit
+markupsafe==2.1.5
+    # via jinja2
 marshmallow==3.21.1
     # via dataclasses-json
+mmh3==4.1.0
+    # via chromadb
+monotonic==1.6
+    # via posthog
+mpmath==1.3.0
+    # via sympy
 multidict==6.0.5
     # via
     #   aiohttp
     #   yarl
+murmurhash==1.0.10
+    # via
+    #   preshed
+    #   spacy
+    #   thinc
 mypy-extensions==1.0.0
     # via typing-inspect
 nest-asyncio==1.6.0
     # via chainlit
 numpy==1.26.4
     # via
+    #   blis
+    #   chroma-hnswlib
+    #   chromadb
     #   langchain
     #   langchain-community
+    #   onnxruntime
+    #   spacy
+    #   thinc
+oauthlib==3.2.2
+    # via
+    #   kubernetes
+    #   requests-oauthlib
+onnxruntime==1.17.1
+    # via chromadb
 openai==1.16.0
     # via langchain-openai
 opentelemetry-api==1.24.0
     # via
+    #   chromadb
     #   opentelemetry-exporter-otlp-proto-grpc
     #   opentelemetry-exporter-otlp-proto-http
     #   opentelemetry-instrumentation
+    #   opentelemetry-instrumentation-asgi
+    #   opentelemetry-instrumentation-fastapi
     #   opentelemetry-sdk
     #   uptrace
 opentelemetry-exporter-otlp==1.24.0
@@ -156,11 +246,20 @@ opentelemetry-exporter-otlp-proto-common==1.24.0
     #   opentelemetry-exporter-otlp-proto-grpc
     #   opentelemetry-exporter-otlp-proto-http
 opentelemetry-exporter-otlp-proto-grpc==1.24.0
-    # via opentelemetry-exporter-otlp
+    # via
+    #   chromadb
+    #   opentelemetry-exporter-otlp
 opentelemetry-exporter-otlp-proto-http==1.24.0
     # via opentelemetry-exporter-otlp
 opentelemetry-instrumentation==0.45b0
-    # via uptrace
+    # via
+    #   opentelemetry-instrumentation-asgi
+    #   opentelemetry-instrumentation-fastapi
+    #   uptrace
+opentelemetry-instrumentation-asgi==0.45b0
+    # via opentelemetry-instrumentation-fastapi
+opentelemetry-instrumentation-fastapi==0.45b0
+    # via chromadb
 opentelemetry-proto==1.24.0
     # via
     #   opentelemetry-exporter-otlp-proto-common
@@ -168,38 +267,90 @@ opentelemetry-proto==1.24.0
     #   opentelemetry-exporter-otlp-proto-http
 opentelemetry-sdk==1.24.0
     # via
+    #   chromadb
     #   opentelemetry-exporter-otlp-proto-grpc
     #   opentelemetry-exporter-otlp-proto-http
     #   uptrace
 opentelemetry-semantic-conventions==0.45b0
-    # via opentelemetry-sdk
+    # via
+    #   opentelemetry-instrumentation-asgi
+    #   opentelemetry-instrumentation-fastapi
+    #   opentelemetry-sdk
+opentelemetry-util-http==0.45b0
+    # via
+    #   opentelemetry-instrumentation-asgi
+    #   opentelemetry-instrumentation-fastapi
 orjson==3.10.0
-    # via langsmith
+    # via
+    #   chromadb
+    #   langsmith
+overrides==7.7.0
+    # via chromadb
 packaging==23.2
     # via
+    #   build
     #   chainlit
+    #   huggingface-hub
     #   langchain-core
     #   literalai
     #   marshmallow
+    #   onnxruntime
+    #   spacy
+    #   thinc
+    #   weasel
+pip==24.0
+posthog==3.5.0
+    # via chromadb
+preshed==3.0.9
+    # via
+    #   spacy
+    #   thinc
 protobuf==4.25.3
     # via
     #   googleapis-common-protos
+    #   onnxruntime
     #   opentelemetry-proto
+pulsar-client==3.4.0
+    # via chromadb
+pyasn1==0.6.0
+    # via
+    #   pyasn1-modules
+    #   rsa
+pyasn1-modules==0.4.0
+    # via google-auth
 pydantic==2.6.4
     # via
     #   chainlit
+    #   chromadb
+    #   confection
     #   fastapi
     #   langchain
     #   langchain-core
     #   langsmith
     #   literalai
     #   openai
+    #   spacy
+    #   thinc
+    #   weasel
 pydantic-core==2.16.3
     # via pydantic
 pyjwt==2.8.0
     # via chainlit
+pymupdf==1.24.0
+pymupdfb==1.24.0
+    # via pymupdf
+pypika==0.48.9
+    # via chromadb
+pyproject-hooks==1.0.0
+    # via build
+python-dateutil==2.9.0.post0
+    # via
+    #   kubernetes
+    #   posthog
 python-dotenv==1.0.1
-    # via chainlit
+    # via
+    #   chainlit
+    #   uvicorn
 python-engineio==4.9.0
     # via python-socketio
 python-graphql-client==0.4.3
@@ -210,61 +361,124 @@ python-socketio==5.11.2
     # via fastapi-socketio
 pyyaml==6.0.1
     # via
+    #   chromadb
+    #   huggingface-hub
+    #   kubernetes
     #   langchain
     #   langchain-community
     #   langchain-core
+    #   uvicorn
 regex==2023.12.25
     # via tiktoken
 requests==2.31.0
     # via
     #   arxiv
+    #   chromadb
+    #   huggingface-hub
+    #   kubernetes
     #   langchain
     #   langchain-community
     #   langchain-core
     #   langsmith
     #   opentelemetry-exporter-otlp-proto-http
+    #   posthog
     #   python-graphql-client
+    #   requests-oauthlib
+    #   spacy
     #   tiktoken
+    #   weasel
+requests-oauthlib==2.0.0
+    # via kubernetes
+rsa==4.9
+    # via google-auth
 setuptools==69.2.0
-    # via opentelemetry-instrumentation
+    # via
+    #   opentelemetry-instrumentation
+    #   spacy
+    #   thinc
 sgmllib3k==1.0.0
     # via feedparser
 simple-websocket==1.0.0
     # via python-engineio
+six==1.16.0
+    # via
+    #   kubernetes
+    #   posthog
+    #   python-dateutil
+smart-open==6.4.0
+    # via
+    #   spacy
+    #   weasel
 sniffio==1.3.1
     # via
     #   anyio
     #   httpx
     #   openai
+spacy==3.7.4
+    # via en-core-web-sm
+spacy-legacy==3.0.12
+    # via spacy
+spacy-loggers==1.0.5
+    # via spacy
 sqlalchemy==2.0.29
     # via
     #   langchain
     #   langchain-community
+srsly==2.4.8
+    # via
+    #   confection
+    #   spacy
+    #   thinc
+    #   weasel
 starlette==0.32.0.post1
     # via
     #   chainlit
     #   fastapi
+sympy==1.12
+    # via onnxruntime
 syncer==2.0.3
     # via chainlit
 tenacity==8.2.3
     # via
+    #   chromadb
     #   langchain
     #   langchain-community
     #   langchain-core
+thinc==8.2.3
+    # via spacy
 tiktoken==0.6.0
     # via langchain-openai
+tokenizers==0.15.2
+    # via chromadb
 tomli==2.0.1
-    # via chainlit
+    # via
+    #   build
+    #   chainlit
+    #   pyproject-hooks
 tqdm==4.66.2
-    # via openai
+    # via
+    #   chromadb
+    #   huggingface-hub
+    #   openai
+    #   spacy
+typer==0.9.4
+    # via
+    #   chromadb
+    #   spacy
+    #   weasel
 typing-extensions==4.10.0
     # via
+    #   asgiref
+    #   chromadb
+    #   cloudpathlib
     #   fastapi
+    #   huggingface-hub
     #   openai
     #   opentelemetry-sdk
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
+    #   typer
     #   typing-inspect
     #   uvicorn
 typing-inspect==0.9.0
@@ -272,13 +486,32 @@ typing-inspect==0.9.0
 uptrace==1.22.0
     # via chainlit
 urllib3==2.2.1
-    # via requests
+    # via
+    #   kubernetes
+    #   requests
 uvicorn==0.25.0
-    # via chainlit
+    # via
+    #   chainlit
+    #   chromadb
+uvloop==0.19.0
+    # via uvicorn
+wasabi==1.1.2
+    # via
+    #   spacy
+    #   thinc
+    #   weasel
 watchfiles==0.20.0
-    # via chainlit
+    # via
+    #   chainlit
+    #   uvicorn
+weasel==0.3.4
+    # via spacy
+websocket-client==1.7.0
+    # via kubernetes
 websockets==12.0
-    # via python-graphql-client
+    # via
+    #   python-graphql-client
+    #   uvicorn
 wrapt==1.16.0
     # via
     #   deprecated
