@@ -42,7 +42,7 @@ def initialize_chains():
     map_chain = LLMChain(llm=model, prompt=map_prompt)
 
     reduce_template = """
-    以下は一連の文書です。日本語で要約してください。
+    以下は一連の文書です。**日本語**で要約してください。
     ただし、次のことに注意してください。
     - 簡潔に表現する
     - 不明な単語や人名と思われるものは英語のまま表示する
@@ -105,21 +105,20 @@ async def handle_chat_start():
     return docs
 
 
-async def process_document(docs):
+async def process_document(id):
     """
     取得したドキュメントをダウンロードし、PDFをテキストに変換する
     """
-    id = docs[0].metadata["Entry ID"].split("/")[-1]
     pdf_url = f"https://arxiv.org/pdf/{id}.pdf"
     response = requests.get(pdf_url)
 
-    if not os.path.exists("tmp"):
-        os.mkdir("tmp")
+    if not os.path.exists("./tmp"):
+        os.mkdir("./tmp")
 
-    with open(f"tmp/{id}.pdf", "wb") as f:
+    with open(f"./tmp/{id}.pdf", "wb") as f:
         f.write(response.content)
 
-    pdf_docs = PyMuPDFLoader(f"tmp/{id}.pdf").load()
+    pdf_docs = PyMuPDFLoader(f"./tmp/{id}.pdf").load()
     text_splitter = CharacterTextSplitter.from_tiktoken_encoder(
         chunk_size=1000, chunk_overlap=0
     )
@@ -134,7 +133,8 @@ async def chat_start():
     チャット開始時に行う一連の処理を定義する
     """
     docs = await handle_chat_start()
-    split_docs = await process_document(docs)
+    id = docs[0].metadata["Entry ID"].split("/")[-1]
+    split_docs = await process_document(id)
 
     database = Chroma(embedding_function=embeddings)
     database.add_documents(split_docs)
@@ -144,7 +144,9 @@ async def chat_start():
     res = map_reduce_chain.invoke(split_docs)
 
     msg = f"## 論文\nタイトル: {docs[0].metadata['Title']}\n著者: {docs[0].metadata['Authors']}\n## 要約\n{res['output_text']}"
-    await cl.Message(msg).send()
+
+    elements = [cl.Pdf(name=id, display="inline", path=f"./tmp/{id}.pdf")]
+    await cl.Message(msg, elements=elements).send()
 
 
 @cl.on_message
@@ -156,7 +158,6 @@ async def main(message):
     pdf_qa = ConversationalRetrievalChain.from_llm(
         model, database.as_retriever(), return_source_documents=True
     )
-
     result = pdf_qa({"question": message.content, "chat_history": chat_history})
     chat_history.append((message.content, result["answer"]))
     await cl.Message(result["answer"]).send()
