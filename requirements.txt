@@ -112,7 +112,9 @@ langchain-core==0.1.38
     # via
     #   langchain
     #   langchain-community
+    #   langchain-openai
     #   langchain-text-splitters
+langchain-openai==0.1.1
 langchain-text-splitters==0.0.1
     # via langchain
 langsmith==0.1.38
@@ -139,6 +141,7 @@ numpy==1.26.4
     #   langchain
     #   langchain-community
 openai==1.16.0
+    # via langchain-openai
 opentelemetry-api==1.24.0
     # via
     #   opentelemetry-exporter-otlp-proto-grpc
@@ -210,6 +213,8 @@ pyyaml==6.0.1
     #   langchain
     #   langchain-community
     #   langchain-core
+regex==2023.12.25
+    # via tiktoken
 requests==2.31.0
     # via
     #   arxiv
@@ -219,6 +224,7 @@ requests==2.31.0
     #   langsmith
     #   opentelemetry-exporter-otlp-proto-http
     #   python-graphql-client
+    #   tiktoken
 setuptools==69.2.0
     # via opentelemetry-instrumentation
 sgmllib3k==1.0.0
@@ -245,6 +251,8 @@ tenacity==8.2.3
     #   langchain
     #   langchain-community
     #   langchain-core
+tiktoken==0.6.0
+    # via langchain-openai
 tomli==2.0.1
     # via chainlit
 tqdm==4.66.2
